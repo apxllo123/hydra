@@ -36,7 +36,10 @@ jobs:
         run: yarn typecheck:node
 
       - name: Run Mac compatibility unit tests
-        run: yarn test --test-name-pattern="MacCompatibilityManager|MacCompatibilityRegistry"
+        run: |
+          node --import ./scripts/register-ts-node.mjs --test \
+            src/main/services/mac-compatibility/MacCompatibilityManager.test.ts \
+            src/main/services/mac-compatibility/MacCompatibilityRegistry.test.ts
 
       - name: Run Mac compatibility renderer tests
         run: yarn test:renderer:mac
