@@ -33,23 +33,47 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: TypeScript type check
-        run: yarn tsc --noEmit -p tsconfig.node.json
+        run: yarn typecheck:node
 
-      - name: Run Mac compatibility tests
+      - name: Run Mac compatibility unit tests
+        run: yarn test:mac-compatibility
+
+      - name: Run Mac compatibility renderer tests
+        run: yarn test:renderer:mac
+
+      - name: Verify macOS environment
         run: |
+          set -e
+
           echo "=== macOS environment ==="
           sw_vers
+          test "$(uname -s)" = "Darwin"
+
           echo ""
           echo "=== Architecture ==="
           uname -m
+
           echo ""
           echo "=== Node.js ==="
           node --version
+
           echo ""
           echo "=== Yarn ==="
           yarn --version
+
           echo ""
           echo "=== Mac compatibility source ==="
+          test -d src/main/services/mac-compatibility
           find src/main/services/mac-compatibility -maxdepth 2 -type f | sort
+
+          echo ""
+          echo "=== Required compatibility files ==="
+          test -f src/main/services/mac-compatibility/MacCompatibilityManager.ts
+          test -f src/main/services/mac-compatibility/MacCompatibilityManager.test.ts
+          test -f src/main/services/mac-compatibility/MacCompatibilityRegistry.ts
+          test -f src/main/services/mac-compatibility/MacCompatibilityTypes.ts
+          test -f src/main/services/mac-compatibility/MacSystemDetector.ts
+          test -f src/main/services/mac-compatibility/MacWineDetector.ts
+
           echo ""
           echo "=== Mac compatibility test complete ==="
