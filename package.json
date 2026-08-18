@@ -4,9 +4,15 @@
   "description": "Hydra",
   "main": "./out/main/index.js",
   "author": "Los Broxas",
-  "repository": {"type": "git", "url": "https://github.com/hydralauncher/hydra.git"},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hydralauncher/hydra.git"
+  },
   "type": "module",
-  "engines": {"npm": "please-use-yarn", "yarn": ">= 1.19.1"},
+  "engines": {
+    "npm": "please-use-yarn",
+    "yarn": ">= 1.19.1"
+  },
   "scripts": {
     "format": "prettier --write .",
     "format-check": "prettier --check .",
@@ -141,7 +147,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "electron": "^40.9.3",
     "electron-builder": "26.0.12",
-    "electron-builder-squirrel-windows": "26.0.12",
+    "electron-builder-squirrel-windows": "^26.0.12",
     "electron-vite": "^4.0.1",
     "eslint": "^8.56.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
